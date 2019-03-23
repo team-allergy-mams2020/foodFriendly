@@ -50,5 +50,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-//the ting goes skrrrap
-//Mans not hot
+//This is an updated comment... 3/23/2019
