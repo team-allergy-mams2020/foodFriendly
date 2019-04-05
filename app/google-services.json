@@ -21,10 +21,6 @@
             "package_name": "com.example.foodfriendly",
             "certificate_hash": "08b9119dd218b68889fb34a4435fa3f1197b6759"
           }
-        },
-        {
-          "client_id": "505435456541-ta0dhmrjl8im4m8drofdvbihcivnp512.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -33,20 +29,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "505435456541-ta0dhmrjl8im4m8drofdvbihcivnp512.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
