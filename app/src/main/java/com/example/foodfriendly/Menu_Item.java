@@ -5,30 +5,16 @@ import java.util.HashMap;
 
 public class Menu_Item {
     private String item_name;
-    private ArrayList<String> ingredients = new ArrayList<String>();
-    private HashMap<String, Boolean> allergies;
-//    private String[] allergens = {
-//            "Dairy",
-//            "Egg",
-//            "Fish",
-//            "Gluten",
-//            "Meat",
-//            "Peanut",
-//            "Soy",
-//            "Tree Nut",
-//            "Wheat"
-//    };
+    private ArrayList<String> ingredients;
+
+    HashMap<String, Integer> generalIngredients;
 
     public Menu_Item(){}
 
     public Menu_Item(String item_name, ArrayList<String> ingredients) {
         this.item_name = item_name;
         this.ingredients = ingredients;
-//        allergies = new HashMap<>();
-//
-//        for(int i  = 0; i < allergens.length; i++) {
-//            allergies.put(allergens[i],Boolean.FALSE);
-//        }
+
     }
 
     public String getItem_name() {
@@ -47,6 +33,14 @@ public class Menu_Item {
         this.ingredients = ingredients;
     }
 
+    public HashMap<String, Integer> getGeneralIngredients() {
+        return generalIngredients;
+    }
+
+    public void setGeneralIngredients(HashMap<String, Integer> generalIngredients) {
+        this.generalIngredients = generalIngredients;
+    }
+
     @Override
     public String toString() {
         String str =  item_name + " ";
@@ -57,5 +51,4 @@ public class Menu_Item {
         }
         return str;
     }
-
 }

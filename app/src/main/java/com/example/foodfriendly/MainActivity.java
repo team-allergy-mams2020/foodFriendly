@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        AllergyViewConfiguration avc = new AllergyViewConfiguration(this);
+
+        Log.d(TAG, avc.getAllergies().toString());
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference root = database.getReference("restaurants");
 
