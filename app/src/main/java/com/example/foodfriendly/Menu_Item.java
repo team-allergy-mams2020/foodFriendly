@@ -1,19 +1,19 @@
 package com.example.foodfriendly;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Menu_Item {
     private String item_name;
     private ArrayList<String> ingredients;
-
-    HashMap<String, Integer> generalIngredients;
+    private String allergens;
 
     public Menu_Item(){}
 
-    public Menu_Item(String item_name, ArrayList<String> ingredients) {
+    public Menu_Item(String item_name, ArrayList<String> ingredients, String allergens) {
         this.item_name = item_name;
         this.ingredients = ingredients;
+        this.allergens = allergens;
+
 
     }
 
@@ -33,12 +33,12 @@ public class Menu_Item {
         this.ingredients = ingredients;
     }
 
-    public HashMap<String, Integer> getGeneralIngredients() {
-        return generalIngredients;
+    public String getAllergens() {
+        return allergens;
     }
 
-    public void setGeneralIngredients(HashMap<String, Integer> generalIngredients) {
-        this.generalIngredients = generalIngredients;
+    public void setAllergens(String allergens) {
+        this.allergens = allergens;
     }
 
     @Override
@@ -49,6 +49,7 @@ public class Menu_Item {
                 str += s + " ";
             }
         }
+        str += " " + allergens;
         return str;
     }
 }

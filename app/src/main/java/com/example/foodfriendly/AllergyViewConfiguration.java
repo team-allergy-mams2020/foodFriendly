@@ -97,7 +97,7 @@ public class AllergyViewConfiguration {
         } catch (FileNotFoundException e) {
 
             e.printStackTrace();
-            Log.d(TAG, "failed to retrieve file...");
+            Log.d(TAG, "Failed to retrieve file...");
         }
 
     }

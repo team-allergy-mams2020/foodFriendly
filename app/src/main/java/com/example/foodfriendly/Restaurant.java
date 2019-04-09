@@ -34,9 +34,10 @@ public class Restaurant {
     @Override
     public String toString() {
         String str = restaurant_name;
-        for(Menu_Item mi : menu)
+        for(Menu_Item mi : menu) {
             if(mi != null)
                 str += mi.toString();
+        }
         return str;
     }
 }
