@@ -12,11 +12,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class AllergyViewConfiguration {
     public final String TAG = "AVC";
 
-    private HashMap<String, Integer> allergies;
+    private Map<String, Integer> allergies;
     private String[] allergens = {
             "Dairy",
             "Egg",
@@ -35,19 +37,28 @@ public class AllergyViewConfiguration {
 
     public AllergyViewConfiguration(Context context) {
         this.context = context;
-        allergies = new HashMap<String, Integer>();
-
+        allergies = new LinkedHashMap<String, Integer>();
         for(int i  = 0; i < allergens.length; i++) {
             //0 False, 1 True
             allergies.put(allergens[i],new Integer(0));
         }
     }
 
-    public HashMap<String, Integer> getAllergies() {
-        return allergies;
+    public ArrayList<Integer> getAllergies() {
+        ArrayList<Integer> userAllergyData = new ArrayList<Integer>();
+
+        //Convert LinkedHashMap to ArrayList of Integer
+        Iterator it = allergies.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            userAllergyData.add((Integer) pair.getValue());
+        }
+
+        return userAllergyData;
     }
 
     public void readAllergenData() {
+        allergies.clear();
         InputStream is = context.getResources().openRawResource(R.raw.allergens);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
@@ -59,11 +70,10 @@ public class AllergyViewConfiguration {
                 //Split by comma "," to get user allergies
                 String fields[] = line.split(",");
 
-                //Read data
+                //Read data from file
                 for(int i = 0; i < fields.length; i++) {
-                    allergies.put(allergens[i], Integer.parseInt(fields[i]));
+                    allergies.put(allergens[i], (int)Integer.parseInt(fields[i]));
                 }
-
             }
         }
         catch (IOException e) {
@@ -77,7 +87,7 @@ public class AllergyViewConfiguration {
             FileOutputStream fos = context.openFileOutput("allergens.csv", Context.MODE_PRIVATE);
             ArrayList<Integer> allergyData = new ArrayList<Integer>();
 
-            //Convert HashMap to array of int
+            //Convert HashMap to ArrayList of Integer
             Iterator it = allergies.entrySet().iterator();
              while (it.hasNext()) {
                 HashMap.Entry pair = (HashMap.Entry)it.next();

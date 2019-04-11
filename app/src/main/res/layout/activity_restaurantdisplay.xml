@@ -18,20 +18,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/menuItems"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="254dp"
-        android:layout_marginRight="254dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="menu items"
-        android:textSize="24sp"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/menuItemList"
+        android:layout_width="325dp"
+        android:layout_height="515dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantName" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurantName"
+        app:layout_constraintVertical_bias="0.154" />
+
+>>>>>>> Stashed changes
 </android.support.constraint.ConstraintLayout>

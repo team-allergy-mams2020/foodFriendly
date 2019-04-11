@@ -7,14 +7,14 @@ public class Menu_Item {
     private ArrayList<String> ingredients;
     private String allergens;
 
+    private boolean available = true;
+
     public Menu_Item(){}
 
     public Menu_Item(String item_name, ArrayList<String> ingredients, String allergens) {
         this.item_name = item_name;
         this.ingredients = ingredients;
         this.allergens = allergens;
-
-
     }
 
     public String getItem_name() {
@@ -33,13 +33,25 @@ public class Menu_Item {
         this.ingredients = ingredients;
     }
 
-    public String getAllergens() {
-        return allergens;
+    public int[] getAllergens() {
+        String allergensNoCommas = allergens.replace(",","");
+        int[] allergenData = new int[allergensNoCommas.length()];
+        for(int i = 0; i < allergensNoCommas.length(); i++) {
+            allergenData[i] = allergensNoCommas.charAt(i)-'0';
+        }
+        return allergenData;
     }
 
     public void setAllergens(String allergens) {
         this.allergens = allergens;
     }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailability(boolean isAvailable) {available = isAvailable;}
+
 
     @Override
     public String toString() {
