@@ -1,11 +1,16 @@
 package com.example.foodfriendly;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +22,7 @@ import java.util.Map;
 
 public class AllergyViewConfiguration {
     public final String TAG = "AVC";
+    public final String FILE_NAME = "allergens";
 
     private Map<String, Integer> allergies;
     private String[] allergens = {
@@ -48,68 +54,67 @@ public class AllergyViewConfiguration {
         ArrayList<Integer> userAllergyData = new ArrayList<Integer>();
 
         //Convert LinkedHashMap to ArrayList of Integer
+        int i = 0;
         Iterator it = allergies.entrySet().iterator();
         while (it.hasNext()) {
             HashMap.Entry pair = (HashMap.Entry)it.next();
-            userAllergyData.add((Integer) pair.getValue());
+            i = Integer.parseInt(pair.getValue().toString());
+            userAllergyData.add(i);
         }
 
         return userAllergyData;
     }
 
+    public void setAllergies(ArrayList<Integer> userAllergyData) {
+
+        Iterator it = allergies.entrySet().iterator();
+        int count = 0;
+
+        while(it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry) it.next();
+            pair.setValue(userAllergyData.get(count));
+            count ++;
+        }
+
+        saveAllergenData();
+
+    }
+
     public void readAllergenData() {
-        allergies.clear();
-        InputStream is = context.getResources().openRawResource(R.raw.allergens);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//        allergies.clear();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String allergyString = sp.getString("allergens","0,0,0,0,0,0,0,0");
+        String[] temp = allergyString.split(",");
 
-        String line = "";
-
-        try {
-            while ((line = reader.readLine()) != null) {
-
-                //Split by comma "," to get user allergies
-                String fields[] = line.split(",");
-
-                //Read data from file
-                for(int i = 0; i < fields.length; i++) {
-                    allergies.put(allergens[i], (int)Integer.parseInt(fields[i]));
-                }
-            }
+        Iterator it = allergies.entrySet().iterator();
+        int count = 0;
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry) it.next();
+            pair.setValue(temp[count]);
+            count ++;
         }
-        catch (IOException e) {
-            Log.wtf(TAG, "ERROR reading data on line" + line);
-        }
+
     }
 
     public void saveAllergenData() {
-        try {
 
-            FileOutputStream fos = context.openFileOutput("allergens.csv", Context.MODE_PRIVATE);
-            ArrayList<Integer> allergyData = new ArrayList<Integer>();
+        ArrayList<Integer> allergyData = new ArrayList<Integer>();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
 
-            //Convert HashMap to ArrayList of Integer
-            Iterator it = allergies.entrySet().iterator();
-             while (it.hasNext()) {
-                HashMap.Entry pair = (HashMap.Entry)it.next();
-                allergyData.add((Integer) pair.getValue());
-                it.remove(); // avoids a ConcurrentModificationException
-            }
-
-            //Save data to file
-            for(int i = 0; i < allergyData.size(); i++) {
-                try {
-                    fos.write((int) allergyData.get((i)));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
-            Log.d(TAG, "Failed to retrieve file...");
+        //Convert HashMap to ArrayList of Integer
+        Iterator it = allergies.entrySet().iterator();
+        while (it.hasNext()) {
+            HashMap.Entry pair = (HashMap.Entry)it.next();
+            allergyData.add((Integer) pair.getValue());
         }
+        String allergyString = android.text.TextUtils.join(",",allergyData);
+        editor.clear();
+        editor.putString("allergens",allergyString);
+        editor.commit();
+        Log.d(TAG, sp.getString("allergens","0,0,0,0,0,0,0,0"));
 
     }
+
 
 }

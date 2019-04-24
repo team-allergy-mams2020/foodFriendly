@@ -1,10 +1,15 @@
 package com.example.foodfriendly;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,10 +17,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
     public final String TAG = "MainActivity";
+
+    ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Read from the database
         root.addValueEventListener(new ValueEventListener() {
-            ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -43,16 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     restaurants.add(restaurant);
                     Log.d(TAG, "Restaurant: " + restaurant.toString());
 
-                }
-                flagAllergenicItems(avc,restaurants);
-
-                //Check to determine if flagAllergenicItems functions properly.
-                for(Restaurant r : restaurants) { //loop through restaurants
-                    for(Menu_Item mi : r.getMenu()) { //loop through menu of each restaurant
-                        if(mi != null) { //Eliminate null menu items from the data set (bug).
-                            Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
-                        }
-                    }
                 }
 
             }
@@ -98,11 +101,13 @@ public class MainActivity extends AppCompatActivity {
             for(Menu_Item mi : r.getMenu()) { //loop through menu of each restaurant
                 if(mi != null) { //Eliminate null menu items from the data.
                     int[] menuAllergens = mi.getAllergens();
-                    ArrayList<Integer> userAllergiesList = avc.getAllergies();
                     for(int i = 0; i < menuAllergens.length; i++) { //loop through allergens of each menu item
-                        if(menuAllergens[i] == 1 && userAllergiesList.get(i) == 1) {
+                        if(menuAllergens[i] == 1 && userAllergies.get(i) == 1) {
                             mi.setAvailability(false); //marks menu item with a flag for display purposes
                             break; //As soon as one ingredient matches user allergy, break.
+                        }
+                        else {
+                            mi.setAvailability(true);
                         }
 
                     }
@@ -110,4 +115,37 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void convertToFile(View v) {
+        LinearLayout checkList = (LinearLayout) findViewById(R.id.checkList);
+        ArrayList<Integer> userAllergyData = new ArrayList<>();
+        for(int i = 0; i < checkList.getChildCount(); i++) {
+            if (checkList.getChildAt(i) instanceof CheckBox) {
+                if (((CheckBox) checkList.getChildAt(i)).isChecked()) {
+                    userAllergyData.add(1);
+                } else {
+                    userAllergyData.add(0);
+
+                }
+            }
+        }
+        AllergyViewConfiguration allergyViewConfiguration = new AllergyViewConfiguration(this);
+        allergyViewConfiguration.setAllergies(userAllergyData);
+        flagAllergenicItems(allergyViewConfiguration, restaurants);
+
+        //Check to determine if convertToFile functions properly.
+        for(Restaurant r : restaurants) {
+            //loop through restaurants
+            for(Menu_Item mi : r.getMenu()) {
+                //loop through menu of each restaurant
+                if(mi != null) {
+                    //Eliminate null menu items from the data set (bug).
+                    Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
+                }
+            }
+        }
+        setContentView(R.layout.activity_display);
+
+    }
+
 }
