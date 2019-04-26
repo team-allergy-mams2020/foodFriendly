@@ -52,7 +52,6 @@ public class Menu_Item {
 
     public void setAvailability(boolean isAvailable) {available = isAvailable;}
 
-
     @Override
     public String toString() {
         String str =  item_name + " ";

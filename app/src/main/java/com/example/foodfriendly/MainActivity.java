@@ -1,5 +1,6 @@
 package com.example.foodfriendly;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,12 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        setChecks();
 
 
     }
@@ -117,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void convertToFile(View v) {
+
+
         LinearLayout checkList = (LinearLayout) findViewById(R.id.checkList);
         ArrayList<Integer> userAllergyData = new ArrayList<>();
         for(int i = 0; i < checkList.getChildCount(); i++) {
@@ -134,18 +135,41 @@ public class MainActivity extends AppCompatActivity {
         flagAllergenicItems(allergyViewConfiguration, restaurants);
 
         //Check to determine if convertToFile functions properly.
-        for(Restaurant r : restaurants) {
-            //loop through restaurants
-            for(Menu_Item mi : r.getMenu()) {
-                //loop through menu of each restaurant
-                if(mi != null) {
-                    //Eliminate null menu items from the data set (bug).
-                    Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
-                }
-            }
-        }
-        setContentView(R.layout.activity_display);
+//        for(Restaurant r : restaurants) {
+//            //loop through restaurants
+//            for(Menu_Item mi : r.getMenu()) {
+//                //loop through menu of each restaurant
+//                if(mi != null) {
+//                    //Eliminate null menu items from the data set (bug).
+//                    Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
+//                }
+//            }
+//        }
+
+//        Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
+//        intent.putExtra("restaurants",restaurants);
+//        MainActivity.this.startActivity(intent);
+
 
     }
 
+    public void setChecks() {
+        LinearLayout checkList = (LinearLayout) findViewById(R.id.checkList);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String[] temp = sp.getString("allergens","0,0,0,0,0,0,0,0").split(",");
+        ArrayList<Integer> userAllergyData = new ArrayList<>();
+
+        for(int i = 0; i < temp.length; i++) {
+            userAllergyData.add(Integer.parseInt(temp[i]));
+        }
+
+        Log.d(TAG,userAllergyData.toString());
+
+        for(int i = 0; i < checkList.getChildCount(); i++) {
+            if (checkList.getChildAt(i) instanceof CheckBox) {
+                if(userAllergyData.get(i) == 1)
+                    ((CheckBox) checkList.getChildAt(i)).setChecked(true);
+            }
+        }
+    }
 }
