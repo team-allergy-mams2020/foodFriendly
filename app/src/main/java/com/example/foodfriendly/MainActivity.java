@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setChecks();
 
 
+
     }
 
     @Override
@@ -146,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }
 
-//        Intent intent = new Intent(MainActivity.this, DisplayActivity.class);
-//        intent.putExtra("restaurants",restaurants);
-//        MainActivity.this.startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
+        intent.putExtra("restaurants",restaurants);
+        MainActivity.this.startActivity(intent);
 
 
     }

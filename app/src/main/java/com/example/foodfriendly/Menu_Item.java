@@ -1,8 +1,12 @@
 package com.example.foodfriendly;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Menu_Item {
+public class Menu_Item implements Serializable {
     private String item_name;
     private ArrayList<String> ingredients;
     private String allergens;
@@ -62,5 +66,13 @@ public class Menu_Item {
         }
         str += " " + allergens;
         return str;
+    }
+
+    private void readObject(ObjectInputStream inputStream) throws ClassNotFoundException, IOException {
+        inputStream.defaultReadObject();
+    }
+
+    private void writeObject(ObjectOutputStream outputStream) throws IOException {
+        outputStream.defaultWriteObject();
     }
 }
