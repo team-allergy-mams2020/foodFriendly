@@ -1,54 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerv_view">
+        </android.support.v7.widget.RecyclerView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="365dp"
         android:layout_height="85dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="1dp"
         android:text="Food Friendly"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="32dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="168dp"
         android:layout_height="39dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginLeft="121dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="312dp"
-        android:layout_marginRight="312dp"
-        android:layout_marginBottom="25dp"
         android:text="My Restaurants"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/restaurants"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="117dp" />
 
-    <TextView
-        android:id="@+id/restaurants"
-        android:layout_width="173dp"
-        android:layout_height="154dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="388dp"
-        android:layout_marginRight="388dp"
-        android:layout_marginBottom="626dp"
-        android:text="restaurants"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
