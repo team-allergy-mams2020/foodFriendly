@@ -1,19 +1,50 @@
 package com.example.foodfriendly;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Menu_Item implements Serializable {
+public class Menu_Item implements Parcelable {
     private String item_name;
-    private ArrayList<String> ingredients;
+    private ArrayList<String> ingredients = new ArrayList<>();
     private String allergens;
 
     private boolean available = true;
 
     public Menu_Item(){}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(item_name);
+        out.writeStringList(ingredients);
+        out.writeString(allergens);
+    }
+
+    public static final Parcelable.Creator<Menu_Item> CREATOR = new Parcelable.Creator<Menu_Item>() {
+        public Menu_Item createFromParcel(Parcel in) {
+            return new Menu_Item(in);
+        }
+
+        public Menu_Item[] newArray(int size) {
+            return new Menu_Item[size];
+        }
+    };
+
+    private Menu_Item(Parcel in) {
+        item_name = in.readString();
+        in.readStringList(ingredients);
+        allergens = in.readString();
+    }
 
     public Menu_Item(String item_name, ArrayList<String> ingredients, String allergens) {
         this.item_name = item_name;
@@ -56,8 +87,8 @@ public class Menu_Item implements Serializable {
 
     public void setAvailability(boolean isAvailable) {available = isAvailable;}
 
-    @Override
-    public String toString() {
+    //@Override
+    /*public String toString() {
         String str =  item_name + " ";
         for(String s : ingredients) {
             if (s != null) {
@@ -66,13 +97,13 @@ public class Menu_Item implements Serializable {
         }
         str += " " + allergens;
         return str;
-    }
+    }*/
 
-    private void readObject(ObjectInputStream inputStream) throws ClassNotFoundException, IOException {
+    /*private void readObject(ObjectInputStream inputStream) throws ClassNotFoundException, IOException {
         inputStream.defaultReadObject();
     }
 
     private void writeObject(ObjectOutputStream outputStream) throws IOException {
         outputStream.defaultWriteObject();
-    }
+    }*/
 }

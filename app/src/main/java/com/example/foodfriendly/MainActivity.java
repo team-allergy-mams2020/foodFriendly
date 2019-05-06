@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
-        intent.putExtra("restaurants",restaurants);
+        intent.putParcelableArrayListExtra("restaurants", restaurants);
         MainActivity.this.startActivity(intent);
 
 

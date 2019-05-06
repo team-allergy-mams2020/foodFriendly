@@ -32,22 +32,37 @@ public class DisplayActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<String> mRestaurantNames=new ArrayList();
+    ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private ArrayList<String> mMenuItemNames=new ArrayList();
+    private ArrayList<Boolean> mAvailable = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        mRestaurantNames.add("you e");
-        mRestaurantNames.add("you e");
-        mRestaurantNames.add("you e");
-        mRestaurantNames.add("you e");
-        mRestaurantNames.add("you f");
-
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        ArrayList<String> restaurants = bundle.getStringArrayList("restaurants");
-        Log.d(TAG, restaurants.toString());
+        if (bundle != null) {
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                Log.d(TAG, String.format("%s %s (%s)", key,
+                        value.toString(), value.getClass().getName()));
+            }
+        }
+        restaurants = bundle.getParcelableArrayList("restaurants");
+        Log.d(TAG, restaurants.get(0).getRestaurant_name());
+        ArrayList<String> itemNames = new ArrayList<String>();
+        for (Restaurant r: restaurants) {
+            for( Menu_Item mi : r.getMenu()) {
+                if(mi != null) {
+                    mRestaurantNames.add(r.getRestaurant_name());
+                    mMenuItemNames.add(mi.getItem_name());
+                    mAvailable.add(mi.isAvailable());
+                }
+
+            }
+        }
 
         initRecyclerView();
 
@@ -57,7 +72,7 @@ public class DisplayActivity extends AppCompatActivity {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mRestaurantNames, this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mRestaurantNames, mMenuItemNames, mAvailable,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

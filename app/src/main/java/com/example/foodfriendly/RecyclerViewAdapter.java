@@ -17,10 +17,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<String> mRestaurantNames=new ArrayList<>();
+    private ArrayList<String> mMenuItemNames = new ArrayList<>();
+    private ArrayList<Boolean> mAvailable = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> RestaurantNames, Context context){
-        mRestaurantNames = RestaurantNames;
+    public RecyclerViewAdapter(ArrayList<String> restaurantNames, ArrayList<String> itemNames, ArrayList<Boolean> available, Context context){
+        mRestaurantNames = restaurantNames;
+        mMenuItemNames = itemNames;
+        mAvailable = available;
+
         mContext = context;
     }
 
