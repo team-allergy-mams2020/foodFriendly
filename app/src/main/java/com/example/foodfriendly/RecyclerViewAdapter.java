@@ -41,6 +41,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
         holder.restaurantName.setText(mRestaurantNames.get(position));
+        holder.itemName.setText(mMenuItemNames.get(position));
+        if(mAvailable.get(position) == true) {
+            holder.available.setText("Edible!");
+        } else {
+            holder.available.setText("Not edible");
+        }
+
         final int pos = position;
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
@@ -59,11 +66,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView restaurantName;
+        TextView restaurantName, itemName, available;
         RelativeLayout parentLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             restaurantName=itemView.findViewById(R.id.restaurant_name);
+            itemName = itemView.findViewById(R.id.item_name);
+            available = itemView.findViewById(R.id.availability);
             parentLayout=itemView.findViewById(R.id.parent_layout);
         }
     }

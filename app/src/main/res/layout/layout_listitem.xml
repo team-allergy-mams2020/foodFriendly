@@ -7,13 +7,37 @@
     android:id="@+id/parent_layout">
 
     <TextView
+        android:id="@+id/restaurant_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="dummytext"
-        android:id="@+id/restaurant_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="32dp"
+        android:text="restaurant_name"
         android:textColor="#000"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:textSize="17sp"/>
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/restaurant_name"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="-16dp"
+        android:layout_marginTop="0dp"
+        android:text="item_name"
+        android:textColor="#000"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="384dp"
+        android:text="availability"
+        android:textColor="#000"
+        android:textSize="36sp" />
 
 </RelativeLayout>

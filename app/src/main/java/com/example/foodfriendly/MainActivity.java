@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i < menuAllergens.length; i++) { //loop through allergens of each menu item
                         if(menuAllergens[i] == 1 && userAllergies.get(i) == 1) {
                             mi.setAvailability(false); //marks menu item with a flag for display purposes
+                            Log.d(TAG,"FOUND");
                             break; //As soon as one ingredient matches user allergy, break.
                         }
                         else {

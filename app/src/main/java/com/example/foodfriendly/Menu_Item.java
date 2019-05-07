@@ -28,6 +28,7 @@ public class Menu_Item implements Parcelable {
         out.writeString(item_name);
         out.writeStringList(ingredients);
         out.writeString(allergens);
+        out.writeInt(available ? 1:0);
     }
 
     public static final Parcelable.Creator<Menu_Item> CREATOR = new Parcelable.Creator<Menu_Item>() {
@@ -44,6 +45,7 @@ public class Menu_Item implements Parcelable {
         item_name = in.readString();
         in.readStringList(ingredients);
         allergens = in.readString();
+        available = (in.readInt() == 1);
     }
 
     public Menu_Item(String item_name, ArrayList<String> ingredients, String allergens) {
