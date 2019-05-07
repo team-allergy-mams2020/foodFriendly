@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">foodFriendly</string>
     <string name="action_settings">Settings</string>
+    <string name="my_restaurants">My Restaurants</string>
+    <string name="food_friendly">Food Friendly</string>
+    <string name="restaurant_name">restaurant_name</string>
 </resources>

@@ -38,6 +38,6 @@
         android:layout_marginLeft="384dp"
         android:text="availability"
         android:textColor="#000"
-        android:textSize="36sp" />
+        android:textSize="17sp" />
 
 </RelativeLayout>

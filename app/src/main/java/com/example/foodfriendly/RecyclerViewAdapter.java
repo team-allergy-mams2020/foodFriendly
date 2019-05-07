@@ -16,9 +16,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mRestaurantNames=new ArrayList<>();
-    private ArrayList<String> mMenuItemNames = new ArrayList<>();
-    private ArrayList<Boolean> mAvailable = new ArrayList<>();
+    private ArrayList<String> mRestaurantNames;
+    private ArrayList<String> mMenuItemNames;
+    private ArrayList<Boolean> mAvailable;
     private Context mContext;
 
     public RecyclerViewAdapter(ArrayList<String> restaurantNames, ArrayList<String> itemNames, ArrayList<Boolean> available, Context context){

@@ -31,9 +31,9 @@ public class DisplayActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<String> mRestaurantNames=new ArrayList();
+    private ArrayList<String> mRestaurantNames = new ArrayList();
     ArrayList<Restaurant> restaurants = new ArrayList<>();
-    private ArrayList<String> mMenuItemNames=new ArrayList();
+    private ArrayList<String> mMenuItemNames = new ArrayList();
     private ArrayList<Boolean> mAvailable = new ArrayList<>();
 
     @Override
@@ -54,6 +54,7 @@ public class DisplayActivity extends AppCompatActivity {
         Log.d(TAG, restaurants.get(0).getRestaurant_name());
         ArrayList<String> itemNames = new ArrayList<String>();
         for (Restaurant r: restaurants) {
+
             for( Menu_Item mi : r.getMenu()) {
                 if(mi != null) {
                     mRestaurantNames.add(r.getRestaurant_name());
