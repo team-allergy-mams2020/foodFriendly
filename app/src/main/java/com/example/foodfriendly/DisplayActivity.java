@@ -39,7 +39,7 @@ public class DisplayActivity extends AppCompatActivity {
 
 
     }
-
+    //initRecyclerView
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
