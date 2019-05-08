@@ -8,24 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<String> mRestaurantNames=new ArrayList<>();
-    private ArrayList<String> mMenuItemNames = new ArrayList<>();
-    private ArrayList<Boolean> mAvailable = new ArrayList<>();
     private Context mContext;
+    private ArrayList<String> mItemNames = new ArrayList<>();
+    private ArrayList<Boolean> mAvailable = new ArrayList<>();
 
-    public RecyclerViewAdapter(ArrayList<String> restaurantNames, ArrayList<String> itemNames, ArrayList<Boolean> available, Context context){
-        mRestaurantNames = restaurantNames;
-        mMenuItemNames = itemNames;
+    public MenuItemRecyclerViewAdapter(ArrayList<String> menu_items, ArrayList<Boolean> available, Context context){
+        mItemNames = menu_items;
         mAvailable = available;
-
         mContext = context;
     }
 
@@ -40,40 +36,38 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
-        holder.restaurantName.setText(mRestaurantNames.get(position));
-        holder.itemName.setText(mMenuItemNames.get(position));
-        if(mAvailable.get(position) == true) {
-            holder.available.setText("Edible!");
+        holder.itemName.setText(mItemNames.get(position));
+        if(mAvailable.get(position)) {
+            holder.itemAvailability.setText("Edible!");
         } else {
-            holder.available.setText("Not edible");
+            holder.itemAvailability.setText("Not edible");
         }
 
         final int pos = position;
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Log.d(TAG, "onClick: clicked on: "+mRestaurantNames.get(pos));
-
-                Toast.makeText(mContext, mRestaurantNames.get(pos), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: clicked on: "+mItemNames.get(pos));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mRestaurantNames.size();
+        return mItemNames.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView restaurantName, itemName, available;
+        TextView itemName, itemAvailability;
         RelativeLayout parentLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            restaurantName=itemView.findViewById(R.id.restaurant_name);
-            itemName = itemView.findViewById(R.id.item_name);
-            available = itemView.findViewById(R.id.availability);
+            itemName=itemView.findViewById(R.id.item_name);
+            itemAvailability=itemView.findViewById(R.id.availability);
             parentLayout=itemView.findViewById(R.id.parent_layout);
         }
     }
+
+
 }
