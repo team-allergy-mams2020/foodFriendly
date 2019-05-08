@@ -1,6 +1,7 @@
 package com.example.foodfriendly;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,10 +38,15 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
         holder.itemName.setText(mItemNames.get(position));
+
         if(mAvailable.get(position)) {
             holder.itemAvailability.setText("Edible!");
+            holder.itemAvailability.setTextColor(Color.rgb(0,255,0));
+
         } else {
-            holder.itemAvailability.setText("Not edible");
+           holder.itemAvailability.setText("Not edible");
+           holder.itemAvailability.setTextColor(Color.rgb(255,0,0));
+
         }
 
         final int pos = position;

@@ -4,4 +4,6 @@
     <string name="my_restaurants">My Restaurants</string>
     <string name="food_friendly">Food Friendly</string>
     <string name="restaurant_name">restaurant_name</string>
+    <string name="item_name">item_name</string>
+    <string name="availability">availability</string>
 </resources>

@@ -32,10 +32,18 @@ public class MenuDisplayActivity extends AppCompatActivity {
         TextView restaurant_name = findViewById(R.id.item_name);
         restaurant_name.setText(restaurantName);
 
-        for(Menu_Item mi:menuItems) {
-            if(mi != null) {
+        for(Menu_Item mi : menuItems) {
+            if(mi != null && mi.isAvailable()) {
                 mItemNames.add(mi.getItem_name());
                 mAvailable.add(mi.isAvailable());
+            }
+
+        }
+        for(Menu_Item mi : menuItems) {
+            if (mi != null && !mi.isAvailable()) {
+                mItemNames.add(mi.getItem_name());
+                mAvailable.add(mi.isAvailable());
+
             }
         }
 
