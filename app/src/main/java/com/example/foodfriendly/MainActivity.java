@@ -137,16 +137,16 @@ public class MainActivity extends AppCompatActivity {
         flagAllergenicItems(allergyViewConfiguration, restaurants);
 
         //Check to determine if convertToFile functions properly.
-//        for(Restaurant r : restaurants) {
-//            //loop through restaurants
-//            for(Menu_Item mi : r.getMenu()) {
-//                //loop through menu of each restaurant
-//                if(mi != null) {
-//                    //Eliminate null menu items from the data set (bug).
-//                    Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
-//                }
-//            }
-//        }
+        for(Restaurant r : restaurants) {
+            //loop through restaurants
+            for(Menu_Item mi : r.getMenu()) {
+                //loop through menu of each restaurant
+                if(mi != null) {
+                    //Eliminate null menu items from the data set (bug).
+                    Log.d(TAG, mi.getItem_name() + ", Availability: " + mi.isAvailable());
+                }
+            }
+        }
 
         Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
         intent.putParcelableArrayListExtra("restaurants", restaurants);
