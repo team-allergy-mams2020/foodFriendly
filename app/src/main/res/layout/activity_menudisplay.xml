@@ -9,15 +9,21 @@
         android:id="@+id/itemrecyclerv_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"></android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="#C5EFF7"
+        android:gravity="bottom|center"
         android:text="restaurant_name"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="60sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:fontFamily="@font/bungee_shade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_name"
-        android:layout_marginTop="0dp"
-        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:gravity="bottom|center"
         android:text="Menu"
-        android:textSize="24sp"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/baloo_bhai"
         tools:layout_editor_absoluteX="121dp"
         tools:layout_editor_absoluteY="117dp" />
 

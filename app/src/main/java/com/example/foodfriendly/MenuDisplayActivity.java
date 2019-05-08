@@ -16,7 +16,7 @@ public class MenuDisplayActivity extends AppCompatActivity {
 
     private String restaurantName;
     private ArrayList<Menu_Item> menuItems;
-    private ArrayList<String> mItemNames = new ArrayList<>();
+    private ArrayList<Menu_Item> mItems = new ArrayList<>();
     private ArrayList<Boolean> mAvailable = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +32,15 @@ public class MenuDisplayActivity extends AppCompatActivity {
         TextView restaurant_name = findViewById(R.id.item_name);
         restaurant_name.setText(restaurantName);
 
-        for(Menu_Item mi : menuItems) {
+        for(Menu_Item mi:menuItems) {
             if(mi != null && mi.isAvailable()) {
-                mItemNames.add(mi.getItem_name());
+                mItems.add(mi);
                 mAvailable.add(mi.isAvailable());
             }
-
         }
         for(Menu_Item mi : menuItems) {
             if (mi != null && !mi.isAvailable()) {
-                mItemNames.add(mi.getItem_name());
+                mItems.add(mi);
                 mAvailable.add(mi.isAvailable());
 
             }
@@ -53,7 +52,7 @@ public class MenuDisplayActivity extends AppCompatActivity {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recyclerView = findViewById(R.id.itemrecyclerv_view);
-        MenuItemRecyclerViewAdapter adapter = new MenuItemRecyclerViewAdapter(mItemNames,mAvailable,this);
+        MenuItemRecyclerViewAdapter adapter = new MenuItemRecyclerViewAdapter(mItems,mAvailable,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
