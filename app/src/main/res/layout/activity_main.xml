@@ -6,41 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <TextView
         android:id="@+id/selectRestrictionsText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="162dp"
         android:layout_marginBottom="720dp"
-        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:gravity="bottom|center"
         android:scrollHorizontally="true"
         android:text="Select your dietary restrictions"
+        android:textColor="@android:color/white"
         android:textSize="40sp"
+        app:fontFamily="@font/baloo_bhai"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/checkList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="148dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="40dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +47,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Dairy"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectRestrictionsText" />
@@ -71,7 +61,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Egg"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/fishCheckBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.48"
@@ -87,7 +77,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Fish"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/glutenCheckBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +92,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Gluten"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/meatCheckBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +107,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Meat"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/peanutCheckBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +122,7 @@
             android:layout_marginEnd="220dp"
             android:layout_marginRight="220dp"
             android:text="Peanuts"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/meatCheckBox" />
@@ -144,7 +134,7 @@
             android:layout_marginLeft="38dp"
             android:duplicateParentState="false"
             android:text="Tree Nuts"
-            android:textSize="24sp" />
+            android:textSize="26sp" />
 
         <CheckBox
             android:id="@+id/wheatCheckBox"
@@ -156,7 +146,7 @@
             android:layout_marginRight="220dp"
             android:layout_marginBottom="206dp"
             android:text="Wheat"
-            android:textSize="24sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

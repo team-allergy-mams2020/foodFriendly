@@ -40,13 +40,13 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         Log.d(TAG, "onBindViewHolder: called.");
         holder.itemName.setText(mItems.get(position).getItem_name());
         if(mAvailable.get(position)) {
-            holder.itemAvailability.setText("Edible!");
+            holder.itemAvailability.setText("Safe to eat!");
             holder.itemAvailability.setTextColor(Color.rgb(0,204,0));
             holder.parentLayout.setBackgroundColor(Color.rgb(201,222,193));
 
 
         } else {
-           holder.itemAvailability.setText("Not edible");
+           holder.itemAvailability.setText("Unsafe to eat");
            holder.itemAvailability.setTextColor(Color.rgb(255,0,0));
             holder.parentLayout.setBackgroundColor(Color.rgb(250,234,230));
         }
