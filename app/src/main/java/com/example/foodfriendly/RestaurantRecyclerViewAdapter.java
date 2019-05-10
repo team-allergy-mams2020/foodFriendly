@@ -41,7 +41,7 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView.Adapter<Restaura
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Log.d(TAG, "onClick: clicked on: "+mRestaurants.get(pos).getRestaurant_name());
+                Log.d(TAG, "onClick: clicked on: " + mRestaurants.get(pos).getRestaurant_name());
 
 
                 Intent intent = new Intent(view.getContext(), MenuDisplayActivity.class);
@@ -63,8 +63,8 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView.Adapter<Restaura
         RelativeLayout parentLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            restaurantName=itemView.findViewById(R.id.item_name);
-            parentLayout=itemView.findViewById(R.id.parent_layout);
+            restaurantName = itemView.findViewById(R.id.item_name);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 

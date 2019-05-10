@@ -1,5 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+// Application:        Food Friendly
+// Class:              DisplayActivity - Controller that displays the list of user's restaurants.
+// Course:             Computer Science (Apps for Good - D Term)
+//
+// Authors:            Alan Chen, Esther Ng, Andrew Youssef
+///////////////////////////////////////////////////////////////////////////////
+
 package com.example.foodfriendly;
 
+//Import Statements
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,20 +19,20 @@ import java.util.ArrayList;
 
 public class DisplayActivity extends AppCompatActivity {
 
+    //Log Tag - DisplayActivity
     private final String TAG = "In DisplayActivity";
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<Restaurant> mRestaurants;
+
+    //List of restaurants to be obtained from MainActivity Intent
     ArrayList<Restaurant> restaurants;
-    private ArrayList<String> mMenuItemNames;
-    private ArrayList<Boolean> mAvailable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Create view after receiving intent from MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
+        //Read hashmap data from intent.
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -33,16 +42,18 @@ public class DisplayActivity extends AppCompatActivity {
                         value.toString(), value.getClass().getName()));
             }
         }
+
         restaurants = bundle.getParcelableArrayList("restaurants");
 
+        //Initialize RecyclerView and display
         initRecyclerView();
 
-
     }
-    //initRecyclerView
+
     private void initRecyclerView(){
+        //Instantiate instance of adapter and display list of restaurants.
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
+        RecyclerView recyclerView = findViewById(R.id.restaurant_list);
         RestaurantRecyclerViewAdapter adapter = new RestaurantRecyclerViewAdapter(restaurants,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
