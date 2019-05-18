@@ -45,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
     //ArrayList of Type restaurant - will store the list of restaurants in the Firebase database.
     ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 
-    //Overriden onCreate Method
+    /**
+     * Overriden onCreate Method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,16 +65,18 @@ public class MainActivity extends AppCompatActivity {
         // Read from the database using an EventListener
         root.addValueEventListener(new ValueEventListener() {
 
-
-            // This method is called once with the initial value and again
-            // whenever data at this location is updated.
-            //Return the entire database using overridden toString() method.
+            /** This method is called once with the initial value and again
+             * whenever data at this location is updated.
+             * Return the entire database using overridden toString() method.
+             * @param dataSnapshot, an instance of the database.
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 //Clear old restaurant data
                 restaurants.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
                     Restaurant restaurant = ds.getValue(Restaurant.class);
                     restaurants.add(restaurant);
 
@@ -79,9 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            /**
+             * Failed to read data from Firebase.
+             * @param error
+             */
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -91,18 +99,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     * @param menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     *
+     * @param item, not to be confused with the Menu_Item class
+     * developed for this app.
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
 
@@ -114,6 +131,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     *
+     * @param avc, an instance of a controller
+     * class that contains the functionality of the checkbox list view
+     * @param rests, a list of restaurants to be manipulated upon.
+     */
     public void flagAllergenicItems(AllergyViewConfiguration avc, ArrayList<Restaurant> rests) {
         //Searches through each menu item of each menu of each restaurant and determines which foods do and do not adhere to
         //the specified user allergens.
@@ -140,9 +163,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Store user dietary restrictions and displays the Food Friendly Restaurants page
+     * after flagging allergenic menu items.
+     * @param v, the View that is to be associated with the method.
+     */
     public void convertToFile(View v) {
-        //Store user dietary restrictions and displays the Food Friendly Restaurants page
-        // after flagging allergenic menu items.
 
         LinearLayout checkList = (LinearLayout) findViewById(R.id.checkList);
         ArrayList<Integer> userAllergyData = new ArrayList<>();
@@ -173,9 +199,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Checks pre-defined user dietary restrictions upon re-opening of application.
+     */
     public void setChecks() {
-        //Checks pre-defined user dietary restrictions upon re-opening of application.
 
         LinearLayout checkList = (LinearLayout) findViewById(R.id.checkList);
 

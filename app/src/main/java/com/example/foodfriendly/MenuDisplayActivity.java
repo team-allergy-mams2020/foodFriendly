@@ -32,6 +32,7 @@ public class MenuDisplayActivity extends AppCompatActivity {
     private ArrayList<Menu_Item> mItems = new ArrayList<>();
     private ArrayList<Boolean> mAvailable = new ArrayList<>();
 
+    //OnCreate method
     protected void onCreate(Bundle savedInstanceState) {
         //Creates view after receiving intent from RestaurantRecyclerViewAdapter
         super.onCreate(savedInstanceState);
@@ -68,7 +69,9 @@ public class MenuDisplayActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
-
+    /**
+     * Used to initialize recycler view.
+     */
     private void initRecyclerView(){
         //Instantiate adapter and display list of menu items, ingredients, and availability.
         Log.d(TAG, "initRecyclerView: init recyclerview");

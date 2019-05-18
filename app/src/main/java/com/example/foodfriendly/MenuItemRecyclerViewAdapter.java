@@ -36,7 +36,13 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
     //StringBuffer to help display ingredients
     private StringBuffer ingredients = new StringBuffer();
 
-    //Constructor method
+
+    /**
+     * Constructor method
+     * @param menu_items, the menu of the restaurant
+     * @param available, whether or not the menu item is available
+     * @param context, the context of the activity page to be used
+     */
     public MenuItemRecyclerViewAdapter(ArrayList<Menu_Item> menu_items, ArrayList<Boolean> available, Context context){
         mItems = menu_items;
         mAvailable = available;
