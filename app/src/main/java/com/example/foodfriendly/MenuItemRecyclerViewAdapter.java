@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+// Application:        Food Friendly
+// Class:              MenuItemRecyclerViewAdapter - RecyclerViewAdapter that controls the display of menu items
+// Course:             Computer Science (Apps for Good - D Term)
+//
+// Authors:            Alan Chen, Esther Ng, Andrew Youssef
+///////////////////////////////////////////////////////////////////////////////
 package com.example.foodfriendly;
 
 import android.content.Context;
@@ -14,20 +21,29 @@ import java.util.ArrayList;
 
 public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecyclerViewAdapter";
+    //Log Tag - MenuItemRecyclerViewAdapter (Full name too long to use)
+    private static final String TAG = "in MIRecyclViewAdapter";
 
+    //RecyclerViewAdapter MUST receive a Context
     private Context mContext;
+
+    //List of menu items
     private ArrayList<Menu_Item> mItems = new ArrayList<>();
+
+    //List of availabilities
     private ArrayList<Boolean> mAvailable = new ArrayList<>();
+
+    //StringBuffer to help display ingredients
     private StringBuffer ingredients = new StringBuffer();
 
+    //Constructor method
     public MenuItemRecyclerViewAdapter(ArrayList<Menu_Item> menu_items, ArrayList<Boolean> available, Context context){
         mItems = menu_items;
         mAvailable = available;
         mContext = context;
     }
 
-
+    //Creates a ViewHolder based on layout_listitem, which is calibrated for displaying menu items.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
@@ -35,10 +51,15 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         return holder;
     }
 
+    //Adds custom style and text to each item in RecyclerView
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
+
+        //Displays item name
         holder.itemName.setText(mItems.get(position).getItem_name());
+
+        //Changes color of RecyclerView ViewHolder based on item availability
         if(mAvailable.get(position)) {
             holder.itemAvailability.setText("Safe to eat!");
             holder.itemAvailability.setTextColor(Color.rgb(0,204,0));
@@ -50,6 +71,8 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
            holder.itemAvailability.setTextColor(Color.rgb(255,0,0));
             holder.parentLayout.setBackgroundColor(Color.rgb(250,234,230));
         }
+
+        //Uses StringBuffer to build a comma-and-space separated String from ingredients
         for(String s : mItems.get(position).getIngredients()) {
             if(s != null) {
                 Log.d(TAG,s);
@@ -62,8 +85,10 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         holder.mainIngredients.setText(ingredients);
         ingredients = new StringBuffer();
 
+        //Position in list for iterating through the parameter lists
         final int pos = position;
 
+        //Logs the item that was clicked
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Log.d(TAG, "onClick: clicked on: "+mItems.get(pos));
@@ -71,11 +96,13 @@ public class MenuItemRecyclerViewAdapter extends RecyclerView.Adapter<MenuItemRe
         });
     }
 
+    //Gets number of items
     @Override
     public int getItemCount() {
         return mItems.size();
     }
 
+    //Links parts of the ViewHolder to proper data
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView itemName, itemAvailability, mainIngredients;

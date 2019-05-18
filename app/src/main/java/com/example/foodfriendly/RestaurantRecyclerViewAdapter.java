@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+// Application:        Food Friendly
+// Class:              RestaurantRecyclerViewAdapter - RecyclerViewAdapter for listing restaurants
+// Course:             Computer Science (Apps for Good - D Term)
+//
+// Authors:            Alan Chen, Esther Ng, Andrew Youssef
+///////////////////////////////////////////////////////////////////////////////
 package com.example.foodfriendly;
 
 import android.content.Context;
@@ -14,17 +21,22 @@ import java.util.ArrayList;
 
 public class RestaurantRecyclerViewAdapter extends RecyclerView.Adapter<RestaurantRecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecyclerViewAdapter";
+    //Log Tag - RestaurantRecyclerViewAdapter (Full name too long)
+    private static final String TAG = "in RRecyclerViewAdapter";
 
+    //RecyclerViewAdapter MUST receive a Context
     private Context mContext;
+
+    //List of restaurants
     private ArrayList<Restaurant> mRestaurants = new ArrayList<>();
 
+    //Constructor
     public RestaurantRecyclerViewAdapter( ArrayList<Restaurant> restaurants, Context context){
         mRestaurants = restaurants;
         mContext = context;
     }
 
-
+    //Creates a ViewHolder based on layout_listrestaurant, which is for listing various restaurants.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listrestaurant, parent, false);
@@ -32,18 +44,22 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView.Adapter<Restaura
         return holder;
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        //Displays the name of the restaurant
         Log.d(TAG, "onBindViewHolder: called.");
         holder.restaurantName.setText(mRestaurants.get(position).getRestaurant_name());
 
+        //Position in list for iterating through the parameter lists
         final int pos = position;
 
+        //Opens up a menu for the restaurant that is clicked
         holder.parentLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Log.d(TAG, "onClick: clicked on: " + mRestaurants.get(pos).getRestaurant_name());
 
-
+                //Passes current restaurant and its menu to MenuDisplayActivity
                 Intent intent = new Intent(view.getContext(), MenuDisplayActivity.class);
                 intent.putExtra("restaurantName",mRestaurants.get(pos).getRestaurant_name());
                 intent.putParcelableArrayListExtra("restaurantItems", mRestaurants.get(pos).getMenu());
@@ -52,11 +68,13 @@ public class RestaurantRecyclerViewAdapter extends RecyclerView.Adapter<Restaura
         });
     }
 
+    //Gets number of restaurants
     @Override
     public int getItemCount() {
         return mRestaurants.size();
     }
 
+    //Links parts of the ViewHolder to proper data
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView restaurantName;
